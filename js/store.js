@@ -11,15 +11,22 @@ const SUPABASE_CONFIG = {
 class PortfolioStore {
   constructor() {
     this.STORAGE_KEY = 'ali_hassen_portfolio_data_v2';
-    this.PIN_KEY = 'ali_hassen_admin_pin';
+    this.PIN_HASH_KEY = 'ali_hassen_admin_pin_hash';
+    this.DEFAULT_PIN_HASH = 'b4bf312fef21906ff617d54271f4fdedd9ae5cc35ec6075d1fe58c0a5ecd06e3'; // SHA-256 hash of initial PIN
     this.listeners = [];
     this.supabaseClient = null;
     this.isCloudSyncing = false;
     this.data = this.loadLocalCache();
     
-    // Default PIN: 2026 if not set
-    if (!localStorage.getItem(this.PIN_KEY)) {
-      localStorage.setItem(this.PIN_KEY, '2026');
+    // Auto-migrate old plaintext PIN if present, else set default hash
+    const oldPlainPin = localStorage.getItem('ali_hassen_admin_pin');
+    if (oldPlainPin) {
+      this.hashString(oldPlainPin).then(h => {
+        localStorage.setItem(this.PIN_HASH_KEY, h);
+        localStorage.removeItem('ali_hassen_admin_pin');
+      });
+    } else if (!localStorage.getItem(this.PIN_HASH_KEY)) {
+      localStorage.setItem(this.PIN_HASH_KEY, this.DEFAULT_PIN_HASH);
     }
 
     this.initSupabase();
@@ -295,15 +302,37 @@ class PortfolioStore {
     this.save();
   }
 
-  // Auth / PIN
-  verifyPIN(inputPin) {
-    const currentPin = localStorage.getItem(this.PIN_KEY) || '2026';
-    return inputPin === currentPin;
+  // Auth / Cryptographic PIN Hashing (SHA-256)
+  async hashString(str) {
+    if (window.crypto && window.crypto.subtle) {
+      try {
+        const msgBuffer = new TextEncoder().encode(str);
+        const hashBuffer = await window.crypto.subtle.digest('SHA-256', msgBuffer);
+        return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+      } catch (e) {
+        console.warn("SubtleCrypto failed, using fallback:", e);
+      }
+    }
+    // Fallback hash
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      hash = ((hash << 5) - hash) + str.charCodeAt(i);
+      hash |= 0;
+    }
+    return 'fb_' + Math.abs(hash).toString(16);
   }
 
-  setPIN(newPin) {
+  async verifyPIN(inputPin) {
+    if (!inputPin) return false;
+    const inputHash = await this.hashString(inputPin);
+    const storedHash = localStorage.getItem(this.PIN_HASH_KEY) || this.DEFAULT_PIN_HASH;
+    return inputHash === storedHash;
+  }
+
+  async setPIN(newPin) {
     if (newPin && newPin.length >= 4) {
-      localStorage.setItem(this.PIN_KEY, newPin);
+      const newHash = await this.hashString(newPin);
+      localStorage.setItem(this.PIN_HASH_KEY, newHash);
       return true;
     }
     return false;

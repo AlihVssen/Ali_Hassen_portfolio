@@ -33,16 +33,17 @@ class DashboardController {
     // PIN Authentication Form
     const pinForm = document.getElementById('admin-pin-form');
     if (pinForm) {
-      pinForm.addEventListener('submit', (e) => {
+      pinForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const pinInput = document.getElementById('admin-pin-input');
-        if (pinInput && store.verifyPIN(pinInput.value.trim())) {
+        const isValid = pinInput ? await store.verifyPIN(pinInput.value.trim()) : false;
+        if (isValid) {
           this.isAuthenticated = true;
           this.renderAuthenticatedView();
         } else {
           const pinError = document.getElementById('pin-error-msg');
           if (pinError) {
-            pinError.textContent = 'Incorrect PIN. Default is 2026';
+            pinError.textContent = 'Incorrect PIN.';
             pinError.style.display = 'block';
           }
         }
@@ -133,12 +134,12 @@ class DashboardController {
     // Change PIN
     const changePinForm = document.getElementById('change-pin-form');
     if (changePinForm) {
-      changePinForm.addEventListener('submit', (e) => {
+      changePinForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const newPinInput = document.getElementById('new-pin-input');
         if (newPinInput && newPinInput.value.length >= 4) {
-          store.setPIN(newPinInput.value);
-          alert("PIN successfully changed.");
+          await store.setPIN(newPinInput.value);
+          alert("PIN successfully changed and securely hashed.");
           newPinInput.value = '';
         } else {
           alert("PIN must be at least 4 characters/digits.");

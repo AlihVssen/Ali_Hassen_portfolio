@@ -812,8 +812,11 @@ body {
 }
 
 /* ==========================================================================
-   SCROLL REVEAL & DIRECTIONAL ENTRANCE ANIMATIONS (Completely Glitch-Free)
+   SCROLL REVEAL ANIMATIONS — Keyframe-based, GLITCH-FREE FOREVER
+   Elements are ALWAYS visible. Animation plays ONCE on scroll-in.
    ========================================================================== */
+
+/* Base: elements are always fully visible — no invisible content ever */
 .reveal-left,
 .reveal-right,
 .reveal-up,
@@ -821,60 +824,41 @@ body {
 .reveal-on-scroll {
   opacity: 1;
   transform: none;
-  transition: 
-    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Initial state only applied when animation is active */
-.js-scroll-animate .reveal-left:not(.revealed) {
-  opacity: 0;
-  transform: translateX(-25px);
+/* Keyframe animations — played once when .animated class is added */
+@keyframes animSlideLeft {
+  from { opacity: 0; transform: translateX(-28px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
-.js-scroll-animate .reveal-right:not(.revealed) {
-  opacity: 0;
-  transform: translateX(25px);
+@keyframes animSlideRight {
+  from { opacity: 0; transform: translateX(28px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
-.js-scroll-animate .reveal-up:not(.revealed) {
-  opacity: 0;
-  transform: translateY(25px);
+@keyframes animSlideUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.js-scroll-animate .reveal-scale:not(.revealed) {
-  opacity: 0;
-  transform: scale(0.96);
+@keyframes animScaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
-.js-scroll-animate .reveal-on-scroll:not(.revealed) {
-  opacity: 0;
-  transform: translateY(20px);
-}
+/* Triggered when element enters viewport */
+.reveal-left.animated   { animation: animSlideLeft  0.65s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.reveal-right.animated  { animation: animSlideRight 0.65s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.reveal-up.animated     { animation: animSlideUp    0.65s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.reveal-scale.animated  { animation: animScaleIn    0.65s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.reveal-on-scroll.animated { animation: animSlideUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) both; }
 
-/* Revealed state */
-.reveal-left.revealed,
-.reveal-right.revealed,
-.reveal-up.revealed,
-.reveal-scale.revealed,
-.reveal-on-scroll.revealed {
-  opacity: 1 !important;
-  transform: translate3d(0, 0, 0) scale(1) !important;
-}
-
-/* Fallback: On mobile, avoid horizontal offsets */
-@media (max-width: 768px) {
-  .js-scroll-animate .reveal-left:not(.revealed),
-  .js-scroll-animate .reveal-right:not(.revealed) {
-    transform: translateY(20px);
-  }
-}
-
-/* Staggered micro-delays for grouped children */
-.stagger-1 { transition-delay: 0.05s; }
-.stagger-2 { transition-delay: 0.1s; }
-.stagger-3 { transition-delay: 0.15s; }
-.stagger-4 { transition-delay: 0.2s; }
+/* Staggered animation delays */
+.stagger-1.animated { animation-delay: 0.05s; }
+.stagger-2.animated { animation-delay: 0.12s; }
+.stagger-3.animated { animation-delay: 0.19s; }
+.stagger-4.animated { animation-delay: 0.26s; }
 
 /* ==========================================================================
    EMPTY PROJECT STATE

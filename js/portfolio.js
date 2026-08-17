@@ -557,18 +557,19 @@ class PortfolioApp {
   initScrollReveal() {
     if (!('IntersectionObserver' in window)) return;
 
-    document.body.classList.add('js-scroll-animate');
+    // Remove js-scroll-animate class (no longer needed)
+    document.body.classList.remove('js-scroll-animate');
 
     this.scrollObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
+          entry.target.classList.add('animated');
           this.scrollObserver.unobserve(entry.target);
         }
       });
-    }, { 
-      threshold: 0.01,
-      rootMargin: '120px 0px 50px 0px'
+    }, {
+      threshold: 0.05,
+      rootMargin: '0px 0px -30px 0px'
     });
 
     this.refreshScrollReveal();
@@ -576,24 +577,13 @@ class PortfolioApp {
 
   refreshScrollReveal() {
     const selectors = '.reveal-left, .reveal-right, .reveal-up, .reveal-scale, .reveal-on-scroll';
-    const elements = document.querySelectorAll(selectors);
-
-    // If observer exists, attach to non-revealed elements
-    if (this.scrollObserver) {
-      const windowHeight = window.innerHeight;
-      elements.forEach(el => {
-        if (el.classList.contains('revealed')) return;
-        const rect = el.getBoundingClientRect();
-        // Immediately reveal anything already on screen
-        if (rect.top < windowHeight * 1.15 && rect.bottom > 0) {
-          el.classList.add('revealed');
-        } else {
-          this.scrollObserver.observe(el);
-        }
-      });
-    } else {
-      elements.forEach(el => el.classList.add('revealed'));
-    }
+    document.querySelectorAll(selectors).forEach(el => {
+      // Skip already animated elements
+      if (el.classList.contains('animated')) return;
+      if (this.scrollObserver) {
+        this.scrollObserver.observe(el);
+      }
+    });
   }
 
   escapeHtml(text) {
