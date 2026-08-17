@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Primary SEO Meta Tags -->
+  <title>Ali Hassen — Web Developer & Digital Creative</title>
+  <meta name="title" content="Ali Hassen — Web Developer & Digital Creative" />
+  <meta name="description" content="Portfolio of Ali Hassen, an early-career web developer and Computer & Information Science student at Alexandria University. Specializing in modern websites, landing pages, WordPress, and AI-assisted workflows." />
+  <meta name="keywords" content="Ali Hassen, Web Developer, Landing Pages, WordPress, AI-assisted development, Front-end, Alexandria University" />
+  <meta name="author" content="Ali Hassen" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Ali Hassen — Web Developer & Digital Creative" />
+  <meta property="og:description" content="Building modern websites and digital experiences with code, creativity, and AI-assisted workflows." />
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+<body>
+
+  <!-- Ambient Animated Background Elements (Particles, Floating Orbs & Grid) -->
+  <div class="ambient-bg-wrapper">
+    <canvas id="ambient-canvas"></canvas>
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+    <div class="ambient-orb orb-3"></div>
+    <div class="ambient-grid-overlay"></div>
+  </div>
+
+  <!-- =========================================================================
+       1. NAVIGATION HEADER
+       ========================================================================= -->
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a href="#hero" class="brand-logo">
+        <div class="brand-mark" id="nav-brand-avatar-wrap">
+          <span id="nav-brand-initials">AH</span>
+        </div>
+        <div>
+          <span class="brand-title">Ali Hassen</span>
+          <span class="brand-badge">Dev</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-links" id="nav-menu">
+          <li><a href="#work" class="nav-link">Selected Work</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#skills" class="nav-link">Capabilities</a></li>
+          <li><a href="#philosophy" class="nav-link">AI Workflow</a></li>
+          <li><a href="#experience" class="nav-link">Experience</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="#contact" class="btn btn-primary btn-sm">Let's Talk</a>
+        <button id="open-dashboard-btn" class="admin-trigger-btn" title="Portfolio Manager & Editor">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/>
+            <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
+          </svg>
+        </button>
+        <button class="mobile-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 12h18M3 6h18M3 18h18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       2. HERO SECTION
+       ========================================================================= -->
+  <section class="hero-section" id="hero">
+    <div class="container hero-grid">
+      <div class="hero-content reveal-left">
+        <div class="hero-header-badge-row">
+          <div class="hero-avatar-mini" id="hero-avatar-mini-container">
+            <img src="" alt="Ali Hassen" id="hero-avatar-mini-img" class="hero-avatar-img" />
+          </div>
+          <div class="hero-label-badge" id="hero-badge-text">
+            WEB DEVELOPER / ALEXANDRIA, EGYPT
+          </div>
+        </div>
+        
+        <h1 class="hero-title" id="hero-name">Ali Hassen</h1>
+        
+        <div class="hero-descriptor" id="hero-role-descriptor">
+          Web Developer • AI-Assisted Development • Digital Creative
+        </div>
+        
+        <p class="hero-tagline" id="hero-tagline">
+          I build modern websites and digital experiences with code, creativity, and AI-assisted workflows.
+        </p>
+
+        <div class="hero-ctas">
+          <a href="#work" class="btn btn-primary">
+            <span>View My Work</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+          
+          <button class="btn btn-secondary action-download-cv">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+            </svg>
+            <span>Download CV</span>
+          </button>
+        </div>
+
+        <div class="hero-status-pill" id="hero-status-pill">
+          <span class="status-dot"></span> Available for select web projects & junior roles
+        </div>
+      </div>
+
+      <!-- 3D Brand Interactive Cube -->
+      <div class="hero-visual reveal-right">
+        <div class="cube-wrapper">
+          <div class="cube-glow-ambient"></div>
+          <div class="cube-container">
+            <div class="cube-3d" id="brand-cube">
+              <div class="cube-face face-front">
+                <span class="face-icon">💻</span>
+                <span class="face-title">WEB</span>
+                <span class="face-sub">Development</span>
+              </div>
+              <div class="cube-face face-back">
+                <span class="face-icon">⚡</span>
+                <span class="face-title">AI</span>
+                <span class="face-sub">Assisted Dev</span>
+              </div>
+              <div class="cube-face face-right">
+                <span class="face-icon">🌐</span>
+                <span class="face-title">WORDPRESS</span>
+                <span class="face-sub">CMS & Portals</span>
+              </div>
+              <div class="cube-face face-left">
+                <span class="face-icon">✍️</span>
+                <span class="face-title">CONTENT</span>
+                <span class="face-sub">Strategy & Copy</span>
+              </div>
+              <div class="cube-face face-top">
+                <span class="face-icon">🎬</span>
+                <span class="face-title">VIDEO</span>
+                <span class="face-sub">Editing & Visuals</span>
+              </div>
+              <div class="cube-face face-bottom">
+                <span class="face-icon">📈</span>
+                <span class="face-title">MARKETING</span>
+                <span class="face-sub">Conversion Focus</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="cube-interaction-hint">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 11-.57-8.38l5.67-5.67"/>
+          </svg>
+          Drag to rotate 3D brand cube
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       3. SELECTED WORK / PROJECTS (TOP VISUAL PRIORITY)
+       ========================================================================= -->
+  <section class="section work-section" id="work">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">Portfolio Showcase</span>
+        <h2 class="section-title">Selected Work</h2>
+        <p class="section-subtitle">
+          Real projects demonstrating responsive web development, landing pages, WordPress implementations, and AI-accelerated workflows.
+        </p>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="filter-tabs-bar reveal-up" id="project-filter-tabs">
+        <!-- Injected via portfolio.js -->
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="projects-grid reveal-up" id="projects-grid">
+        <!-- Injected via portfolio.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       4. AI DEVELOPMENT PHILOSOPHY
+       ========================================================================= -->
+  <section class="section ai-section" id="philosophy">
+    <div class="container">
+      <div class="ai-header-box reveal-up">
+        <span class="section-tag">Strategic Advantage</span>
+        <h2 class="ai-tagline-highlight" id="ai-tagline">BUILDING WITH AI, NOT HIDING BEHIND IT.</h2>
+        <p class="ai-desc-text" id="ai-desc">
+          AI is a development multiplier, not a replacement for human judgment, design taste, and clean code review.
+        </p>
+      </div>
+
+      <div class="pillars-grid reveal-up" id="ai-pillars-grid">
+        <!-- Injected via portfolio.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       5. ABOUT SECTION WITH DEVELOPER PHOTO & EDUCATION
+       ========================================================================= -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <!-- Left: Developer Photo Card + Quick Info -->
+        <div class="about-photo-col reveal-left">
+          <div class="developer-photo-card">
+            <div class="photo-glow-effect"></div>
+            <div class="photo-frame-inner">
+              <img src="" alt="Ali Hassen - Web Developer" id="about-dev-photo" class="dev-full-photo" />
+              <div class="photo-overlay-badge">
+                <span class="status-dot"></span>
+                <span>Available for projects</span>
+              </div>
+            </div>
+            <div class="dev-quick-metrics">
+              <div class="metric-box">
+                <span class="metric-num">Alexandria</span>
+                <span class="metric-lbl">Egypt</span>
+              </div>
+              <div class="metric-box">
+                <span class="metric-num">Web Developer</span>
+                <span class="metric-lbl">Primary Role</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Text & Bio & Education -->
+        <div class="about-text-col reveal-right">
+          <span class="section-tag">About Ali</span>
+          <h2 class="section-title">Web Developer with a Multi-Disciplinary Edge</h2>
+          
+          <div id="about-bio-paragraphs">
+            <!-- Injected via portfolio.js -->
+          </div>
+
+          <div class="about-highlight-box">
+            <p>
+              "I combine code, AI-assisted acceleration, and practical marketing understanding to build digital experiences that look distinctive, load fast, and feel human."
+            </p>
+          </div>
+
+          <!-- Education Callout inside About -->
+          <div style="margin-top: 1.5rem;">
+            <div class="education-cards" id="education-cards">
+              <!-- Injected via portfolio.js -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       6. CAPABILITIES & SKILLS (STRICT VISUAL PRIORITY)
+       ========================================================================= -->
+  <section class="section" id="skills" style="background-color: var(--bg-surface);">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">Technical & Creative Stack</span>
+        <h2 class="section-title">Capabilities & Skill Priority</h2>
+        <p class="section-subtitle">
+          Web development is the core focus, strengthened by complementary digital marketing, video, and content production capabilities.
+        </p>
+      </div>
+
+      <div class="skills-container reveal-up" id="skills-container">
+        <!-- Injected via portfolio.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       7. PROFESSIONAL EXPERIENCE (CONFIRMED DATA ONLY)
+       ========================================================================= -->
+  <section class="section" id="experience">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">Background</span>
+        <h2 class="section-title">Professional Experience</h2>
+        <p class="section-subtitle">
+          Demonstrated leadership and communication experience that directly informs user empathy, conversion optimization, and brand presentation.
+        </p>
+      </div>
+
+      <div class="experience-timeline reveal-up" id="experience-timeline">
+        <!-- Injected via portfolio.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       8. CONTACT SECTION
+       ========================================================================= -->
+  <section class="section contact-section" id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info-col reveal-left">
+          <div>
+            <span class="section-tag">Get In Touch</span>
+            <h2 class="section-title">Let's Build Something Meaningful</h2>
+            <p class="section-subtitle">
+              Have a project, landing page, WordPress website, or junior developer role? Feel free to reach out directly.
+            </p>
+          </div>
+
+          <div class="contact-card-item">
+            <div class="contact-item-icon">📍</div>
+            <div>
+              <span class="contact-item-label">Location</span>
+              <div class="contact-item-val" id="contact-location-display">Alexandria, Egypt</div>
+            </div>
+          </div>
+
+          <div class="contact-card-item">
+            <div class="contact-item-icon">✉️</div>
+            <div>
+              <span class="contact-item-label">Direct Email</span>
+              <a href="mailto:alihassen.dev@example.com" class="contact-item-val" id="contact-email-display">alihassen.dev@example.com</a>
+            </div>
+          </div>
+
+          <div class="contact-card-item">
+            <div class="contact-item-icon">🔗</div>
+            <div>
+              <span class="contact-item-label">Profiles</span>
+              <div style="display: flex; gap: 1rem; margin-top: 0.25rem;">
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="contact-item-val" id="social-github">GitHub</a>
+                <span>•</span>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="contact-item-val" id="social-linkedin">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <form class="portfolio-form reveal-right" id="portfolio-contact-form">
+          <div class="form-group">
+            <label class="form-label" for="contact-name">Your Name</label>
+            <input type="text" id="contact-name" class="form-input" placeholder="e.g. Sarah Jenkins" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="contact-email">Your Email Address</label>
+            <input type="email" id="contact-email" class="form-input" placeholder="name@company.com" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="contact-subject">Project Type / Inquiry</label>
+            <input type="text" id="contact-subject" class="form-input" placeholder="e.g. Landing Page, WordPress Customization, Developer Role" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="contact-message">Message</label>
+            <textarea id="contact-message" class="form-textarea" rows="4" placeholder="Tell me about your project, timeline, and goals..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;">
+            <span>Send Message</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+            </svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       9. FOOTER
+       ========================================================================= -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <p>&copy; 2026 Ali Hassen. Web Developer & Digital Creative.</p>
+        <p style="font-size: 0.8rem; margin-top: 0.25rem;">Built with code, AI acceleration, and refined human design.</p>
+      </div>
+      <ul class="footer-links">
+        <li><a href="#hero">Back to Top ↑</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       10. CASE STUDY DETAIL MODAL
+       ========================================================================= -->
+  <div class="modal-overlay" id="project-modal" role="dialog" aria-modal="true">
+    <div class="modal-container">
+      <button class="modal-close-btn" id="close-modal-btn" aria-label="Close modal">&times;</button>
+      <div class="modal-content-inner" id="modal-case-study-body">
+        <!-- Injected via portfolio.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       11. CV PREVIEW MODAL
+       ========================================================================= -->
+  <div class="modal-overlay" id="cv-modal" role="dialog" aria-modal="true">
+    <div class="modal-container" style="max-width: 750px;">
+      <button class="modal-close-btn" onclick="document.getElementById('cv-modal').classList.remove('active'); document.body.style.overflow='';" aria-label="Close">&times;</button>
+      <div class="modal-content-inner">
+        <div class="cv-preview-sheet">
+          <div class="cv-sheet-header">
+            <div class="cv-sheet-name">ALI HASSEN</div>
+            <div class="cv-sheet-title">Web Developer • AI-Assisted Development • Digital Creative</div>
+            <div style="font-size: 0.85rem; color: #64748b; margin-top: 0.25rem;">Alexandria, Egypt | Computer & Information Science Student, Alexandria University</div>
+          </div>
+
+          <div class="cv-sheet-section">
+            <h4>Profile Summary</h4>
+            <p style="color: #334155;">Early-career web developer focused on building modern responsive websites, high-converting landing pages, and customized WordPress platforms. Leverages AI-assisted workflows for rapid prototyping and clean implementation while maintaining strict visual polish and code quality.</p>
+          </div>
+
+          <div class="cv-sheet-section">
+            <h4>Primary Technical Skills</h4>
+            <p style="color: #334155;">Website Development, Landing Pages, WordPress, Front-End Development, Responsive Web Design, UI Implementation, AI-Assisted Development Tools.</p>
+          </div>
+
+          <div class="cv-sheet-section">
+            <h4>Supporting Digital Capabilities</h4>
+            <p style="color: #334155;">Digital Marketing, Content Strategy, Video Editing (Filmora), Photoshop, Script Writing, Social Media Engagement.</p>
+          </div>
+
+          <div class="cv-sheet-section">
+            <h4>Education</h4>
+            <p style="color: #0f172a; font-weight: 600;">Alexandria University — Computer & Information Science</p>
+            <p style="color: #64748b; font-size: 0.85rem;">Status: Current Student</p>
+          </div>
+
+          <div class="cv-sheet-section">
+            <h4>Professional Experience</h4>
+            <div style="margin-bottom: 0.75rem;">
+              <p style="font-weight: 600; color: #0f172a;">Marketing Manager — European College for International Studies (ECIS)</p>
+              <p style="font-size: 0.85rem; color: #64748b;">Ended — August 2026</p>
+            </div>
+            <div>
+              <p style="font-weight: 600; color: #0f172a;">Marketing Manager — Saudi Company for Franchising & Business Development</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: center; gap: 1rem;">
+          <button class="btn btn-primary" onclick="window.print()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z"/></svg>
+            <span>Print / Save as PDF</span>
+          </button>
+          <button class="btn btn-secondary" onclick="document.getElementById('cv-modal').classList.remove('active'); document.body.style.overflow='';">
+            <span>Close Preview</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Drawer Backdrop -->
+  <div class="drawer-backdrop" id="drawer-backdrop"></div>
+
+  <!-- =========================================================================
+       12. ADMIN DASHBOARD & LIVE EDITOR DRAWER
+       ========================================================================= -->
+  <aside class="admin-drawer" id="admin-dashboard-drawer" aria-label="Admin Dashboard">
+    <div class="dash-header">
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span style="font-size: 1.2rem;">⚡</span>
+        <h3>Portfolio Control Hub</h3>
+      </div>
+      <button id="close-dashboard-btn" class="modal-close-btn" style="position: static;" aria-label="Close">&times;</button>
+    </div>
+
+    <div class="dash-body">
+      <!-- Auth Screen -->
+      <div id="dash-auth-section" class="dash-auth-box">
+        <div class="dash-auth-icon">🔒</div>
+        <h4>Admin Authentication</h4>
+        <p>Enter your 4-digit PIN to edit projects, skills, experience, and profile details in real-time.</p>
+        <form id="admin-pin-form">
+          <input type="password" id="admin-pin-input" class="dash-input" placeholder="PIN (Default: 2026)" style="text-align: center; font-size: 1.2rem; margin-bottom: 1rem;" required />
+          <p id="pin-error-msg" style="color: #ef4444; font-size: 0.85rem; display: none; margin-bottom: 0.75rem;"></p>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Unlock Dashboard</button>
+        </form>
+      </div>
+
+      <!-- Main Authenticated Management View -->
+      <div id="dash-main-section" style="display: none;">
+        <!-- Tab Bar -->
+        <div class="dash-nav-bar">
+          <button class="dash-nav-btn active" data-tab="projects">Projects</button>
+          <button class="dash-nav-btn" data-tab="categories">Categories</button>
+          <button class="dash-nav-btn" data-tab="skills">Skills</button>
+          <button class="dash-nav-btn" data-tab="experience">Experience</button>
+          <button class="dash-nav-btn" data-tab="profile">Profile / Bio</button>
+          <button class="dash-nav-btn" data-tab="backup">Backup / PIN</button>
+        </div>
+
+        <!-- TAB: Projects -->
+        <div class="dash-tab-pane" id="tab-projects">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <h4>Manage Projects</h4>
+            <button class="btn btn-sm btn-primary" id="add-new-project-btn">+ Add New Project</button>
+          </div>
+
+          <div id="dash-projects-list" style="margin-bottom: 2rem;"></div>
+
+          <!-- Project Add / Edit Form -->
+          <div id="project-form-container" class="dash-card-nested">
+            <h4 id="project-form-title" style="margin-bottom: 1rem; color: var(--accent-cyan);">Add New Project</h4>
+            <form id="project-edit-form">
+              <div class="dash-input-group">
+                <label>Project Name *</label>
+                <input type="text" id="proj-name-input" class="dash-input" placeholder="e.g. Apex Launch Landing Page" required />
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="dash-input-group">
+                  <label>Category *</label>
+                  <select id="project-category-select" class="dash-select"></select>
+                </div>
+                <div class="dash-input-group">
+                  <label>Project Type</label>
+                  <input type="text" id="proj-type-input" class="dash-input" placeholder="e.g. High-Converting Landing Page" />
+                </div>
+              </div>
+
+              <div class="dash-input-group" style="display: flex; align-items: center; gap: 0.5rem;">
+                <input type="checkbox" id="proj-featured-input" style="width: auto;" />
+                <label for="proj-featured-input" style="margin: 0; cursor: pointer;">Featured on Homepage</label>
+              </div>
+
+              <div class="dash-input-group">
+                <label>Short Summary / Card Description</label>
+                <input type="text" id="proj-summary-input" class="dash-input" placeholder="One sentence summary of the project..." />
+              </div>
+
+              <div class="dash-input-group">
+                <label>Technologies Used (Comma-separated)</label>
+                <input type="text" id="proj-tech-input" class="dash-input" placeholder="e.g. HTML5, Modern CSS3, WordPress, AI Prototyping" />
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="dash-input-group">
+                  <label>Website / Live Demo URL</label>
+                  <input type="url" id="proj-weburl-input" class="dash-input" placeholder="https://..." />
+                </div>
+                <div class="dash-input-group">
+                  <label>GitHub Repository URL (Optional)</label>
+                  <input type="url" id="proj-github-input" class="dash-input" placeholder="https://github.com/..." />
+                </div>
+              </div>
+
+              <div class="dash-input-group">
+                <label>Main Screenshot Image URL</label>
+                <input type="text" id="proj-screenshot-input" class="dash-input" placeholder="https://..." />
+              </div>
+
+              <div class="dash-input-group">
+                <label>Additional Gallery URLs (One per line)</label>
+                <textarea id="proj-gallery-input" class="dash-textarea" rows="2" placeholder="https://image1.jpg&#10;https://image2.jpg"></textarea>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="dash-input-group">
+                  <label>Client</label>
+                  <input type="text" id="proj-client-input" class="dash-input" placeholder="e.g. Independent Client" />
+                </div>
+                <div class="dash-input-group">
+                  <label>Date / Year</label>
+                  <input type="text" id="proj-date-input" class="dash-input" placeholder="e.g. 2026" />
+                </div>
+              </div>
+
+              <div class="dash-input-group">
+                <label>What Was Built</label>
+                <textarea id="proj-what-input" class="dash-textarea" rows="2" placeholder="Describe the overall scope and solution built..."></textarea>
+              </div>
+
+              <div class="dash-input-group">
+                <label>Objective</label>
+                <textarea id="proj-objective-input" class="dash-textarea" rows="2" placeholder="What problem was this project solving?"></textarea>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="dash-input-group">
+                  <label>Design Approach</label>
+                  <textarea id="proj-design-input" class="dash-textarea" rows="2" placeholder="Visual style, UX decisions..."></textarea>
+                </div>
+                <div class="dash-input-group">
+                  <label>Development / AI Approach</label>
+                  <textarea id="proj-dev-input" class="dash-textarea" rows="2" placeholder="How AI was used to accelerate coding/refining..."></textarea>
+                </div>
+              </div>
+
+              <div class="dash-input-group">
+                <label>Key Features (One feature per line)</label>
+                <textarea id="proj-features-input" class="dash-textarea" rows="3" placeholder="Mobile-first fluid layout&#10;Custom pricing calculator&#10;High-converting lead form"></textarea>
+              </div>
+
+              <div class="dash-input-group">
+                <label>Result / Outcome</label>
+                <textarea id="proj-result-input" class="dash-textarea" rows="2" placeholder="Measurable outcome, client feedback, or lighthouse score..."></textarea>
+              </div>
+
+              <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                <button type="submit" class="btn btn-primary" style="flex-grow: 1;">Save Project</button>
+                <button type="button" id="cancel-project-edit-btn" class="btn btn-secondary">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- TAB: Categories -->
+        <div class="dash-tab-pane" id="tab-categories" style="display: none;">
+          <h4 style="margin-bottom: 1rem;">Manage Project Categories</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Categories appear as tabs in the public Selected Work section.</p>
+          
+          <form id="add-category-form" style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem;">
+            <input type="text" id="new-category-input" class="dash-input" placeholder="e.g. Web Apps, E-Commerce" required />
+            <button type="submit" class="btn btn-primary">+ Add</button>
+          </form>
+
+          <div id="dash-categories-list"></div>
+        </div>
+
+        <!-- TAB: Skills -->
+        <div class="dash-tab-pane" id="tab-skills" style="display: none;">
+          <h4 style="margin-bottom: 0.5rem;">Manage Capabilities & Skills</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem;">Add or remove confirmed skills. Primary Web Development skills remain visually highlighted.</p>
+          <div id="dash-skills-editor"></div>
+        </div>
+
+        <!-- TAB: Experience -->
+        <div class="dash-tab-pane" id="tab-experience" style="display: none;">
+          <h4 style="margin-bottom: 0.5rem;">Manage Experience</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem;">Update roles and confirmed end dates.</p>
+          <div id="dash-experience-editor"></div>
+        </div>
+
+        <!-- TAB: Profile / Bio -->
+        <div class="dash-tab-pane" id="tab-profile" style="display: none;">
+          <h4 style="margin-bottom: 1rem;">Edit Hero & Profile Details</h4>
+          <form id="profile-edit-form">
+            <div class="dash-input-group">
+              <label>Full Name</label>
+              <input type="text" id="prof-name-input" class="dash-input" required />
+            </div>
+
+            <div class="dash-input-group">
+              <label>Primary Title</label>
+              <input type="text" id="prof-headline-input" class="dash-input" required />
+            </div>
+
+            <div class="dash-input-group">
+              <label>Secondary Descriptor</label>
+              <input type="text" id="prof-secondary-input" class="dash-input" />
+            </div>
+
+            <div class="dash-input-group">
+              <label>Tagline / Hero Statement</label>
+              <textarea id="prof-tagline-input" class="dash-textarea" rows="2"></textarea>
+            </div>
+
+            <div class="dash-input-group">
+              <label>Profile & About Photo URL / Upload</label>
+              <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <input type="text" id="prof-avatar-input" class="dash-input" placeholder="https://example.com/your-photo.jpg or upload below" />
+                <label class="btn btn-sm btn-secondary" style="cursor: pointer; white-space: nowrap; margin-bottom: 0;">
+                  📁 Upload Photo
+                  <input type="file" id="prof-avatar-file" accept="image/*" style="display: none;" />
+                </label>
+              </div>
+              <div id="prof-avatar-preview-box" style="display: flex; align-items: center; gap: 1rem; padding: 0.5rem; background: var(--bg-main); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+                <img src="" id="prof-avatar-preview-img" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;" alt="Preview" />
+                <span style="font-size: 0.8rem; color: var(--text-muted);">Photo preview will appear across Navbar, Hero, and About sections</span>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div class="dash-input-group">
+                <label>Location</label>
+                <input type="text" id="prof-location-input" class="dash-input" />
+              </div>
+              <div class="dash-input-group">
+                <label>Status Pill Text</label>
+                <input type="text" id="prof-status-input" class="dash-input" />
+              </div>
+            </div>
+
+            <div class="dash-input-group">
+              <label>About Paragraphs (Separate paragraphs with a blank line)</label>
+              <textarea id="prof-bio-input" class="dash-textarea" rows="6"></textarea>
+            </div>
+
+            <div class="dash-input-group">
+              <label>Contact Email</label>
+              <input type="email" id="prof-email-input" class="dash-input" />
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div class="dash-input-group">
+                <label>GitHub URL</label>
+                <input type="url" id="prof-github-input" class="dash-input" />
+              </div>
+              <div class="dash-input-group">
+                <label>LinkedIn URL</label>
+                <input type="url" id="prof-linkedin-input" class="dash-input" />
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Save Profile Info</button>
+          </form>
+        </div>
+
+        <!-- TAB: Backup / PIN -->
+        <div class="dash-tab-pane" id="tab-backup" style="display: none;">
+          <div class="dash-card-nested" style="margin-bottom: 1.5rem;">
+            <h4 style="margin-bottom: 0.5rem;">Export / Import JSON Data</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Download a complete backup of your portfolio database or import previously saved configurations.</p>
+            
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              <button id="export-json-btn" class="btn btn-secondary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                <span>Export JSON Backup</span>
+              </button>
+              
+              <label class="btn btn-outline" style="cursor: pointer;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                <span>Import JSON</span>
+                <input type="file" id="import-json-file" accept=".json" style="display: none;" />
+              </label>
+            </div>
+          </div>
+
+          <div class="dash-card-nested" style="margin-bottom: 1.5rem;">
+            <h4 style="margin-bottom: 0.5rem;">Change Admin PIN</h4>
+            <form id="change-pin-form" style="display: flex; gap: 0.5rem;">
+              <input type="password" id="new-pin-input" class="dash-input" placeholder="New 4+ character PIN" required />
+              <button type="submit" class="btn btn-secondary">Update PIN</button>
+            </form>
+          </div>
+
+          <div class="dash-card-nested" style="border-color: rgba(239, 68, 68, 0.3);">
+            <h4 style="color: #ef4444; margin-bottom: 0.5rem;">Reset to Verified Defaults</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Restore initial verified positioning and seed projects.</p>
+            <button id="reset-defaults-btn" class="btn btn-danger">Reset All Data</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Supabase JS Client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- JavaScript Modules -->
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/cube.js"></script>
+  <script src="js/particles.js"></script>
+  <script src="js/portfolio.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
