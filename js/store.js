@@ -26,15 +26,25 @@ class PortfolioStore {
   }
 
   initSupabase() {
-    try {
-      if (window.supabase && typeof window.supabase.createClient === 'function') {
-        this.supabaseClient = window.supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey);
-        this.fetchCloudData();
-      } else {
-        console.warn("Supabase library not ready or loaded. Operating in offline cache mode.");
+    const startClient = () => {
+      try {
+        if (window.supabase && typeof window.supabase.createClient === 'function') {
+          this.supabaseClient = window.supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey);
+          console.log("⚡ Supabase Client initialized.");
+          this.fetchCloudData();
+        } else {
+          console.warn("Supabase library not available on window.");
+        }
+      } catch (e) {
+        console.error("Supabase initialization error:", e);
       }
-    } catch (e) {
-      console.warn("Failed to initialize Supabase client:", e);
+    };
+
+    if (window.supabase) {
+      startClient();
+    } else {
+      window.addEventListener('load', startClient);
+      document.addEventListener('DOMContentLoaded', startClient);
     }
   }
 
@@ -43,12 +53,14 @@ class PortfolioStore {
       const stored = localStorage.getItem(this.STORAGE_KEY);
       if (stored) {
         const parsed = JSON.parse(stored);
-        return {
-          ...DEFAULT_DATA,
-          ...parsed,
-          profile: { ...DEFAULT_DATA.profile, ...(parsed.profile || {}) },
-          aiPhilosophy: { ...DEFAULT_DATA.aiPhilosophy, ...(parsed.aiPhilosophy || {}) }
-        };
+        if (parsed && typeof parsed === 'object' && parsed.profile) {
+          return {
+            ...DEFAULT_DATA,
+            ...parsed,
+            profile: { ...parsed.profile },
+            aiPhilosophy: { ...DEFAULT_DATA.aiPhilosophy, ...(parsed.aiPhilosophy || {}) }
+          };
+        }
       }
     } catch (e) {
       console.warn("Could not parse cached portfolio data. Using seed defaults.", e);
@@ -66,28 +78,31 @@ class PortfolioStore {
         .maybeSingle();
 
       if (error) {
-        console.warn("Cloud sync query notice:", error.message);
+        console.error("Supabase fetch notice/error:", error.message);
         return;
       }
 
-      if (data && data.data) {
-        // Update local memory and cache with live cloud data
+      if (data && data.data && typeof data.data === 'object' && data.data.profile) {
+        console.log("⚡ Live portfolio data loaded from Supabase cloud database.");
+        // Take entire cloud data as true source of truth
         this.data = {
           ...DEFAULT_DATA,
           ...data.data,
-          profile: { ...DEFAULT_DATA.profile, ...(data.data.profile || {}) },
+          profile: { ...data.data.profile },
           aiPhilosophy: { ...DEFAULT_DATA.aiPhilosophy, ...(data.data.aiPhilosophy || {}) }
         };
-        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.data));
+        try {
+          localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.data));
+        } catch (e) {
+          console.warn("LocalStorage quota note:", e);
+        }
         this.notify();
-        console.log("⚡ Successfully synchronized live portfolio data from Supabase cloud.");
       } else {
-        // If row doesn't exist yet, seed the cloud with our initial data
-        console.log("No cloud data found yet. Seeding default data to Supabase...");
+        console.log("No cloud data row yet. Seeding default data to Supabase...");
         await this.syncToCloud(this.data);
       }
     } catch (e) {
-      console.warn("Network or cloud fetch issue:", e);
+      console.warn("Cloud connection error:", e);
     }
   }
 
@@ -101,12 +116,12 @@ class PortfolioStore {
           id: 'main',
           data: payload,
           updated_at: new Date().toISOString()
-        });
+        }, { onConflict: 'id' });
 
       if (error) {
-        console.error("Supabase upsert error:", error.message);
+        console.error("❌ Supabase Save Error:", error.message);
       } else {
-        console.log("✅ Data successfully saved to Supabase cloud database.");
+        console.log("✅ Data successfully saved to Supabase cloud.");
       }
     } catch (err) {
       console.error("Failed to sync to Supabase:", err);
@@ -117,11 +132,15 @@ class PortfolioStore {
 
   save() {
     try {
-      // 1. Save locally for instant UI response & offline support
-      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.data));
+      // 1. Persist to localStorage
+      try {
+        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.data));
+      } catch (storageErr) {
+        console.warn("LocalStorage save warning:", storageErr);
+      }
       this.notify();
 
-      // 2. Sync to Supabase cloud
+      // 2. Persist to Supabase cloud database
       this.syncToCloud(this.data);
     } catch (e) {
       console.error("Failed to save data:", e);
@@ -167,7 +186,7 @@ class PortfolioStore {
   }
 
   getProject(id) {
-    return this.data.projects.find(p => p.id === id);
+    return (this.data.projects || []).find(p => p.id === id);
   }
 
   saveProject(project) {

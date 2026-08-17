@@ -553,6 +553,13 @@ class PortfolioApp {
   }
 
   initScrollReveal() {
+    // If IntersectionObserver is not supported, reveal all immediately
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.reveal-left, .reveal-right, .reveal-up, .reveal-scale, .reveal-on-scroll')
+        .forEach(el => el.classList.add('revealed'));
+      return;
+    }
+
     this.scrollObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -561,15 +568,32 @@ class PortfolioApp {
         }
       });
     }, { 
-      threshold: 0.08,
-      rootMargin: '0px 0px -40px 0px'
+      threshold: 0.01,
+      rootMargin: '100px 0px 50px 0px'
     });
 
     this.refreshScrollReveal();
+
+    // Fallback safety timeout: guarantee all elements are visible if observer delays
+    setTimeout(() => {
+      this.refreshScrollReveal();
+      // Ensure above-the-fold and nearby items are forced visible
+      const windowHeight = window.innerHeight;
+      document.querySelectorAll('.reveal-left, .reveal-right, .reveal-up, .reveal-scale, .reveal-on-scroll').forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < windowHeight * 1.5) {
+          el.classList.add('revealed');
+        }
+      });
+    }, 400);
   }
 
   refreshScrollReveal() {
-    if (!this.scrollObserver) return;
+    if (!this.scrollObserver) {
+      document.querySelectorAll('.reveal-left, .reveal-right, .reveal-up, .reveal-scale, .reveal-on-scroll')
+        .forEach(el => el.classList.add('revealed'));
+      return;
+    }
     const selectors = '.reveal-left, .reveal-right, .reveal-up, .reveal-scale, .reveal-on-scroll';
     document.querySelectorAll(selectors).forEach(el => {
       if (!el.classList.contains('revealed')) {

@@ -523,7 +523,7 @@ class DashboardController {
       };
     }
 
-    // Avatar file upload listener (converts to base64 so user can pick any local photo)
+    // Avatar file upload listener (auto-resizes and optimizes photo for cloud database)
     const avatarFile = document.getElementById('prof-avatar-file');
     if (avatarFile) {
       avatarFile.onchange = (e) => {
@@ -531,9 +531,35 @@ class DashboardController {
         if (file) {
           const reader = new FileReader();
           reader.onload = (loadEvt) => {
-            const base64 = loadEvt.target.result;
-            avatarInput.value = base64;
-            if (previewImg) previewImg.src = base64;
+            const img = new Image();
+            img.onload = () => {
+              const canvas = document.createElement('canvas');
+              const MAX_SIZE = 500;
+              let width = img.width;
+              let height = img.height;
+
+              if (width > height) {
+                if (width > MAX_SIZE) {
+                  height *= MAX_SIZE / width;
+                  width = MAX_SIZE;
+                }
+              } else {
+                if (height > MAX_SIZE) {
+                  width *= MAX_SIZE / height;
+                  height = MAX_SIZE;
+                }
+              }
+
+              canvas.width = width;
+              canvas.height = height;
+              const ctx = canvas.getContext('2d');
+              ctx.drawImage(img, 0, 0, width, height);
+
+              const optimizedBase64 = canvas.toDataURL('image/jpeg', 0.85);
+              avatarInput.value = optimizedBase64;
+              if (previewImg) previewImg.src = optimizedBase64;
+            };
+            img.src = loadEvt.target.result;
           };
           reader.readAsDataURL(file);
         }
