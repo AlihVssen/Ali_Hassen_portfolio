@@ -204,9 +204,8 @@ class PortfolioApp {
         `<span class="tech-badge more">+${proj.technologies.length - 3}</span>` : '';
 
       const imageSrc = proj.screenshot || 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80';
-      const staggerClass = `stagger-${(idx % 4) + 1}`;
       const directionClass = idx % 2 === 0 ? 'reveal-left' : 'reveal-right';
-
+      const staggerClass = `stagger-${(idx % 4) + 1}`;
       return `
         <article class="project-card ${proj.featured ? 'featured' : ''} ${directionClass} ${staggerClass}" data-id="${proj.id}">
           <div class="project-media-wrapper">
@@ -249,8 +248,8 @@ class PortfolioApp {
       `;
     }).join('');
 
-    // Trigger reveal for newly rendered items
-    this.refreshScrollReveal();
+    // Register new elements with observer after browser layout
+    requestAnimationFrame(() => this.refreshScrollReveal());
 
     // Attach click listeners to open case study modal
     grid.querySelectorAll('.view-case-study-btn, .open-case-study').forEach(el => {
@@ -431,6 +430,7 @@ class PortfolioApp {
         </div>
       `;
     }).join('');
+    requestAnimationFrame(() => this.refreshScrollReveal());
   }
 
   renderAbout(profile) {
@@ -475,6 +475,7 @@ class PortfolioApp {
         </div>
       `;
     }).join('');
+    requestAnimationFrame(() => this.refreshScrollReveal());
   }
 
   renderExperience(experiences) {
@@ -487,7 +488,6 @@ class PortfolioApp {
       `).join('');
       const directionClass = idx % 2 === 0 ? 'reveal-left' : 'reveal-right';
       const staggerClass = `stagger-${idx + 1}`;
-
       return `
         <div class="timeline-item ${directionClass} ${staggerClass}">
           <div class="timeline-dot"></div>
@@ -506,6 +506,7 @@ class PortfolioApp {
         </div>
       `;
     }).join('');
+    requestAnimationFrame(() => this.refreshScrollReveal());
   }
 
   renderEducation(educations) {
@@ -525,6 +526,7 @@ class PortfolioApp {
         </div>
       </div>
     `).join('');
+    requestAnimationFrame(() => this.refreshScrollReveal());
   }
 
   renderContactInfo(profile) {
@@ -553,12 +555,9 @@ class PortfolioApp {
   }
 
   initScrollReveal() {
-    // If IntersectionObserver is not supported, reveal all immediately
-    if (!('IntersectionObserver' in window)) {
-      document.querySelectorAll('.reveal-left, .reveal-right, .reveal-up, .reveal-scale, .reveal-on-scroll')
-        .forEach(el => el.classList.add('revealed'));
-      return;
-    }
+    if (!('IntersectionObserver' in window)) return;
+
+    document.body.classList.add('js-scroll-animate');
 
     this.scrollObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -569,37 +568,32 @@ class PortfolioApp {
       });
     }, { 
       threshold: 0.01,
-      rootMargin: '100px 0px 50px 0px'
+      rootMargin: '120px 0px 50px 0px'
     });
 
     this.refreshScrollReveal();
-
-    // Fallback safety timeout: guarantee all elements are visible if observer delays
-    setTimeout(() => {
-      this.refreshScrollReveal();
-      // Ensure above-the-fold and nearby items are forced visible
-      const windowHeight = window.innerHeight;
-      document.querySelectorAll('.reveal-left, .reveal-right, .reveal-up, .reveal-scale, .reveal-on-scroll').forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < windowHeight * 1.5) {
-          el.classList.add('revealed');
-        }
-      });
-    }, 400);
   }
 
   refreshScrollReveal() {
-    if (!this.scrollObserver) {
-      document.querySelectorAll('.reveal-left, .reveal-right, .reveal-up, .reveal-scale, .reveal-on-scroll')
-        .forEach(el => el.classList.add('revealed'));
-      return;
-    }
     const selectors = '.reveal-left, .reveal-right, .reveal-up, .reveal-scale, .reveal-on-scroll';
-    document.querySelectorAll(selectors).forEach(el => {
-      if (!el.classList.contains('revealed')) {
-        this.scrollObserver.observe(el);
-      }
-    });
+    const elements = document.querySelectorAll(selectors);
+
+    // If observer exists, attach to non-revealed elements
+    if (this.scrollObserver) {
+      const windowHeight = window.innerHeight;
+      elements.forEach(el => {
+        if (el.classList.contains('revealed')) return;
+        const rect = el.getBoundingClientRect();
+        // Immediately reveal anything already on screen
+        if (rect.top < windowHeight * 1.15 && rect.bottom > 0) {
+          el.classList.add('revealed');
+        } else {
+          this.scrollObserver.observe(el);
+        }
+      });
+    } else {
+      elements.forEach(el => el.classList.add('revealed'));
+    }
   }
 
   escapeHtml(text) {

@@ -812,41 +812,47 @@ body {
 }
 
 /* ==========================================================================
-   SCROLL REVEAL & DIRECTIONAL ENTRANCE ANIMATIONS (Smooth, Professional & Staggered)
+   SCROLL REVEAL & DIRECTIONAL ENTRANCE ANIMATIONS (Completely Glitch-Free)
    ========================================================================== */
 .reveal-left,
 .reveal-right,
 .reveal-up,
 .reveal-scale,
 .reveal-on-scroll {
-  opacity: 0;
-  will-change: transform, opacity;
+  opacity: 1;
+  transform: none;
   transition: 
-    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.reveal-left {
-  transform: translateX(-30px);
+/* Initial state only applied when animation is active */
+.js-scroll-animate .reveal-left:not(.revealed) {
+  opacity: 0;
+  transform: translateX(-25px);
 }
 
-.reveal-right {
-  transform: translateX(30px);
+.js-scroll-animate .reveal-right:not(.revealed) {
+  opacity: 0;
+  transform: translateX(25px);
 }
 
-.reveal-up {
+.js-scroll-animate .reveal-up:not(.revealed) {
+  opacity: 0;
   transform: translateY(25px);
 }
 
-.reveal-scale {
+.js-scroll-animate .reveal-scale:not(.revealed) {
+  opacity: 0;
   transform: scale(0.96);
 }
 
-.reveal-on-scroll {
+.js-scroll-animate .reveal-on-scroll:not(.revealed) {
+  opacity: 0;
   transform: translateY(20px);
 }
 
-/* Revealed state (settles cleanly into original layout) */
+/* Revealed state */
 .reveal-left.revealed,
 .reveal-right.revealed,
 .reveal-up.revealed,
@@ -856,10 +862,10 @@ body {
   transform: translate3d(0, 0, 0) scale(1) !important;
 }
 
-/* Fallback: On mobile, avoid extreme offsets to prevent horizontal scroll */
+/* Fallback: On mobile, avoid horizontal offsets */
 @media (max-width: 768px) {
-  .reveal-left,
-  .reveal-right {
+  .js-scroll-animate .reveal-left:not(.revealed),
+  .js-scroll-animate .reveal-right:not(.revealed) {
     transform: translateY(20px);
   }
 }
